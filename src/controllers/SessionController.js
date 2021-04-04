@@ -4,7 +4,6 @@ import authConfig from '../config/auth';
 
 class SessionController {
   async store(req, res) {
-    return res.json(req.body);
   }
 }
 
