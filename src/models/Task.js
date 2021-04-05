@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 const TaskSchema = new mongoose.Schema(
   {
     name: String,
+    priority: {String, enum: ['Alto', 'Baixo', 'ALTO', 'BAIXO']},
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
