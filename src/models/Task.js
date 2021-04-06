@@ -3,8 +3,15 @@ import mongoose from 'mongoose';
 //Abstracao das Tarefas do sistema no banco de dados do MongoDB, falta colocar outros atributos(se houver). Deixei apenas o atributo Nome.
 const TaskSchema = new mongoose.Schema(
   {
-    name: String,
-    priority: {String, enum: ['Alto', 'Baixo', 'ALTO', 'BAIXO']},
+    name: {
+      type: String,
+      require: true,
+    },
+    priority: {
+      type: String,
+      require: true,
+      enum: ['Alto', 'Baixo', 'ALTO', 'BAIXO']
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
