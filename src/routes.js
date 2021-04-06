@@ -21,7 +21,7 @@ routes.post('/sessions', SessionController.store);
 routes.post('/tasks', TaskController.createTask);
 routes.get('/tasks', TaskController.getAllTasks);
 // routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
-// routes.patch('tasks/:id', TaskController.updateTask);
-// routes.delete('tasks/:id', TaskController.deleteTask);
+routes.patch('/tasks/:id', TaskController.updateTask);
+routes.delete('/tasks/:id', TaskController.deleteTask);
 
 export default routes;
