@@ -8,9 +8,9 @@ import authMiddleware from './middlewares/auth'; //Middleware para autenticacao
 
 const routes = new Router(); // Criando o roteador e associando a uma constante para manipular
 
-//Criar rotas POST,GET,PUT ou DELETE a partir daqui. de acordo com o que precisa na aplicacao. Vou deixar 1 rota GET para testar o Server
+//Criar rotas POST,GET,PUT ou DELETE a partir daqui. de acordo com o que precisa na aplicacao.
 
-routes.post('/users', UserController.store); //Feito, falta so colocar mensagens para entender se ja existe no BD ou se deu erro.
+routes.post('/users', UserController.store); 
 routes.post('/sessions', SessionController.store);
 
 //A partir daqui precisa controlar o acesso as rotas por meio de um middleware de autenticacao.

@@ -1,12 +1,34 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
-//Abstracao do Usuario do sistema no banco de dados do MongoDB, falta colocar outros atributos(se houver). Deixei apenas o atributo Nome, email e senha.
 const UserSchema = new mongoose.Schema(
   {
-    email: String,
-    name: String,
-    password: String,
+    name: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    }
   },
 );
+
+UserSchema.pre('save', async function(next) {
+  const password_hash = await bcrypt.hash(this.password, 10);
+  this.password = password_hash;
+
+  next();
+});
 
 export default mongoose.model('User', UserSchema);

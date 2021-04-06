@@ -11,6 +11,7 @@ class TaskController {
   }
 
   async index(req, res) {
+    return res.send({'ok': true, user: req.userId}); //Teste para saber se ta autenticando com o JWT, esta sim ;)
   }
 }
 
