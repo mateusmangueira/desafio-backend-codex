@@ -10,7 +10,7 @@ const TaskSchema = new mongoose.Schema(
     priority: {
       type: String,
       default: 'Baixa',
-      enum: {values: ['Alto', 'Baixo'], message: 'A task must be "Baixa" or "Alta"'}
+      enum: {values: ['Alta', 'Baixa'], message: 'A task must be "Baixa" or "Alta"'}
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

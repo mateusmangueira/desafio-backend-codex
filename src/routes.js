@@ -15,8 +15,13 @@ routes.post('/sessions', SessionController.store);
 
 //A partir daqui precisa controlar o acesso as rotas por meio de um middleware de autenticacao.
 
-routes.use(authMiddleware); // Daqui pra baixo so acessa as rotas quando estiver autenticado, ou seja, ter um TOKEN JWT.
+// routes.use(authMiddleware); // Daqui pra baixo so acessa as rotas quando estiver autenticado, ou seja, ter um TOKEN JWT.
 
-routes.get('/tasks', TaskController.index);
+// Tasks
+routes.post('/tasks', TaskController.createTask);
+routes.get('/tasks', TaskController.getAllTasks);
+// routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
+// routes.patch('tasks/:id', TaskController.updateTask);
+// routes.delete('tasks/:id', TaskController.deleteTask);
 
 export default routes;
