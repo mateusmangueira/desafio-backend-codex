@@ -11,12 +11,14 @@ const routes = new Router(); // Criando o roteador e associando a uma constante 
 //Criar rotas POST,GET,PUT ou DELETE a partir daqui. de acordo com o que precisa na aplicacao.
 
 routes.post('/users', UserController.store); 
+routes.get('/users', UserController.index); 
 routes.post('/sessions', SessionController.store);
 
 //A partir daqui precisa controlar o acesso as rotas por meio de um middleware de autenticacao.
 
 routes.use(authMiddleware); // Daqui pra baixo so acessa as rotas quando estiver autenticado, ou seja, ter um TOKEN JWT.
 
+routes.post('/logout', SessionController.logout);
 routes.get('/tasks', TaskController.index);
 
 export default routes;
