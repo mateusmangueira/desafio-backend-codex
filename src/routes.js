@@ -4,21 +4,24 @@ import UserController from './controllers/UserController';
 import SessionController from './controllers/SessionController';
 import TaskController from './controllers/TaskController'
 
-import authMiddleware from './middlewares/auth'; //Middleware para autenticacao
+import authMiddleware from './middlewares/auth';
 
-const routes = new Router(); // Criando o roteador e associando a uma constante para manipular
+const routes = new Router(); 
 
-//Criar rotas POST,GET,PUT ou DELETE a partir daqui. de acordo com o que precisa na aplicacao.
+// Users
+routes.post('/users', UserController.store);
 
 routes.post('/users', UserController.store); 
 routes.get('/users', UserController.index); 
 routes.post('/sessions', SessionController.store);
 
-//A partir daqui precisa controlar o acesso as rotas por meio de um middleware de autenticacao.
+routes.use(authMiddleware);
 
-routes.use(authMiddleware); // Daqui pra baixo so acessa as rotas quando estiver autenticado, ou seja, ter um TOKEN JWT.
-
-routes.post('/logout', SessionController.logout);
-routes.get('/tasks', TaskController.index);
+// Tasks
+routes.post('/tasks', TaskController.createTask);
+routes.get('/tasks', TaskController.getAllTasks);
+// routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
+routes.put('/tasks/:id', TaskController.updateTask); //nesse caso seria rota do tipo put, pois vai alterar apenas uma especifica task.
+routes.delete('/tasks/:id', TaskController.deleteTask);
 
 export default routes;
