@@ -45,11 +45,26 @@ class TaskController {
 
   async updateTask(req, res) {
     try{
+      if(req.body.priority) {
+        return res.status(400).json({
+          status: 'fail',
+          message: "Priority can't change"
+        });
+      }
+
       const updateTask = await Task.findByIdAndUpdate(req.params.id,
       req.body, {
           new: true,
           runValidators: true
-      })
+      });
+      
+      if(!updateTask) {
+        return res.status(400).json({
+          status: 'fail',
+          message: "ID not find"
+        });
+      }
+
       res.status(200).json({
           status: 'success',
           data: {
