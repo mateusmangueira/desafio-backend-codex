@@ -19,9 +19,10 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect('mongodb+srv://mateus:123321@backend-desafio-codex.doriq.mongodb.net/backend-desafio?retryWrites=true&w=majority', {
+    const DB = process.env.DATABASE;
+    this.mongoConnection = mongoose.connect(DB, {
       useNewUrlParser: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
