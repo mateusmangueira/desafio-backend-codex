@@ -79,6 +79,11 @@ class TaskController {
     }
   }
 
+  async aliasSortByPriority(req, res) {
+    req.query.sort = 'priority,name';
+    next();
+  }
+
   async deleteTask(req, res) {
     try {
       await Task.findByIdAndDelete(req.params.id);
