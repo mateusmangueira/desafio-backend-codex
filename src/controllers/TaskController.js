@@ -1,4 +1,5 @@
 import Task from '../models/Task';
+import User from '../models/User';
 
 class TaskController {
   async createTask(req, res) {
@@ -19,14 +20,15 @@ class TaskController {
     }
   }
 
+  async aliasSortByPriority(req, res) {
+    req.query.sort = 'priority,name';
+    next();
+  }
+
   async getAllTasks(req, res) {
     try {
-      let query = Task.find();
-
-      // 1) Field limiting
-      query = query.select('-__v');
-
-      let tasks = await query;
+      const user = await User.findById(req.body.user).populate({ path: 'tasks', select: '-__v' })
+      const tasks = user.tasks;
 
       res.status(200).json({
           status: 'sucess',
@@ -49,6 +51,15 @@ class TaskController {
         return res.status(400).json({
           status: 'fail',
           message: "Priority can't change"
+        });
+      }
+
+      const task = await Task.findById(req.params.id);
+
+      if (task.user != req.body.user) {
+        return res.status(400).json({
+          status: 'fail',
+          message: "User does not have access to this task!"
         });
       }
 
@@ -79,16 +90,21 @@ class TaskController {
     }
   }
 
-  async aliasSortByPriority(req, res) {
-    req.query.sort = 'priority,name';
-    next();
-  }
-
   async deleteTask(req, res) {
     try {
+      const task = await Task.findById(req.params.id);
+      
+      if (task.user != req.body.user) {
+        return res.status(400).json({
+          status: 'fail',
+          message: "User does not have access to this task!"
+        });
+      }
+
       await Task.findByIdAndDelete(req.params.id);
       res.status(204).json({
           status: 'success',
+          message: 'Task deleted',
           data: null
       });
     } catch (err) {

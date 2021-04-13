@@ -16,8 +16,13 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
+routes.use((req, res, next) => {
+    req.body.user = req.userId;
+    next();
+});
+
 // Tasks
-routes.post('/tasks', TaskController.createTask);
+routes.post('/tasks',TaskController.createTask);
 routes.get('/tasks', TaskController.getAllTasks);
 routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
 routes.put('/tasks/:id', TaskController.updateTask); //nesse caso seria rota do tipo put, pois vai alterar apenas uma especifica task.
