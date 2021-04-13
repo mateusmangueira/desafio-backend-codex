@@ -21,12 +21,12 @@ const TaskSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-  }
+    }
 },
 {
    toJSON: {
        virtuals:true,
-   }
+    }
   },
 );
 
@@ -40,5 +40,11 @@ TaskSchema.pre('save', function(next) {
 
   next();
 });
+
+// TaskSchema.pre(/^findById/, function(next) {
+  
+
+//   next();
+// })
 
 export default mongoose.model('Task', TaskSchema);
