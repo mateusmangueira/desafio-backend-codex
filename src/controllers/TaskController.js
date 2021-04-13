@@ -20,13 +20,20 @@ class TaskController {
     }
   }
 
-  async aliasSortByPriority(req, res) {
+  async aliasSortByPriority(req, res, next) {
     req.query.sort = 'priority,name';
     next();
   }
 
   async getAllTasks(req, res) {
     try {
+
+      // Verificar esse trecho de codigo para dar o sorting
+      if (req.query.sort) {
+        const sortBy = req.query.sort.split(',').join(' ');
+        query = query.sort(sortBy);
+      }
+      
       const user = await User.findById(req.body.user).populate({ path: 'tasks', select: '-__v' })
       const tasks = user.tasks;
 
