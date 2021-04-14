@@ -15,7 +15,7 @@ class TaskController {
     } catch (err) {
         res.status(400).json({
            status: 'fail',
-            message: err
+            message: 'Fail to creat new Task'
         });
     }
   }
@@ -46,7 +46,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: err
+            message: 'There are no Tasks'
         });
     }
   }
@@ -56,7 +56,7 @@ class TaskController {
       if(req.body.priority) {
         return res.status(400).json({
           status: 'fail',
-          message: "Priority can't change"
+          message: "Priority cannot change"
         });
       }
 
@@ -78,7 +78,7 @@ class TaskController {
       if(!updateTask) {
         return res.status(400).json({
           status: 'fail',
-          message: "ID not find"
+          message: "ID not found"
         });
       }
 
@@ -91,7 +91,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: err
+            message: 'Task not found'
         });
     }
   }
@@ -116,7 +116,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: err
+            message: "Fail to delete Task"
         });
     }
   }

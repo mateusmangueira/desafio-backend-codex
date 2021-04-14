@@ -10,6 +10,7 @@ const routes = new Router();
 
 // Users
 routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
 
 //Sessions
 routes.post('/sessions', SessionController.store);

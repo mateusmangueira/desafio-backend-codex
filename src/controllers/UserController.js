@@ -15,6 +15,15 @@ class UserController {
       return res.status(400).send({error: 'Registration failed'})
     }
   }
+
+  async index(req, res) {
+    try {
+      const users = await User.find();
+      return res.json(users);
+    } catch (error) {
+      return res.status(400).send({error: "There are no Users"})
+    }
+  }
 }
 
 export default new UserController();
