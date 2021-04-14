@@ -9,19 +9,19 @@ class TaskController {
       res.status(201).json({
           status: 'sucess',
           data: {
-              task: newTask
+            task: newTask
           }
       });
     } catch (err) {
         res.status(400).json({
-           status: 'fail',
-            message: 'Fail to creat new Task'
+            status: 'fail',
+            message: err.message
         });
     }
   }
 
   async aliasSortByPriority(req, res, next) {
-    req.query.sort = true; // Apenas como referência
+    req.query.sort = true; // Apenas como referÃªncia
     next();
   }
 
@@ -46,7 +46,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: 'There are no Tasks'
+            message: err
         });
     }
   }
@@ -78,7 +78,7 @@ class TaskController {
       if(!updateTask) {
         return res.status(400).json({
           status: 'fail',
-          message: "ID not found"
+          message: 'ID not found'
         });
       }
 
@@ -91,7 +91,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: 'Task not found'
+            message: err
         });
     }
   }
@@ -103,7 +103,7 @@ class TaskController {
       if (task.user != req.body.user) {
         return res.status(400).json({
           status: 'fail',
-          message: "User does not have access to this task!"
+          message: 'User does not have access to this task!'
         });
       }
 
@@ -116,7 +116,7 @@ class TaskController {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: "Fail to delete Task"
+            message: err
         });
     }
   }

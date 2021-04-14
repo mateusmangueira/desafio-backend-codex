@@ -2,17 +2,20 @@ import User from '../models/User';
 
 class UserController {
   async store(req, res) {
-    const {email, name, password } = req.body;
     try {
-      if (await User.findOne({ email }))
+      const user = await User.create(req.body);
 
-        return res.status(400).send({ error: 'User already exists'});
-
-      const user = await User.create({email, name, password});
-
-      return res.send(user);
+      res.status(201).json({
+        status: 'sucess',
+        data: {
+          user
+        }
+    });
     } catch (error) {
-      return res.status(400).send({error: 'Registration failed'})
+      return res.status(400).send({
+        status: 'fail',
+        message: error.message
+      });
     }
   }
 

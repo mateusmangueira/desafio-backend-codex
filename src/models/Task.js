@@ -4,7 +4,7 @@ const TaskSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: [true, 'A task must have a name'],
+      required: [true, 'A task must have a name'],
       trim: true
     },
     priority: {
@@ -40,11 +40,5 @@ TaskSchema.pre('save', function(next) {
 
   next();
 });
-
-// TaskSchema.pre(/^findById/, function(next) {
-  
-
-//   next();
-// })
 
 export default mongoose.model('Task', TaskSchema);
