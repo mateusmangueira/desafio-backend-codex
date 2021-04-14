@@ -11,6 +11,7 @@ const routes = new Router();
 
 // Users
 routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
 
 //Sessions
 routes.post('/sessions', SessionController.store);
@@ -26,7 +27,7 @@ routes.use((req, res, next) => {
 routes.post('/tasks',TaskController.createTask);
 routes.get('/tasks', TaskController.getAllTasks);
 routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
-routes.put('/tasks/:id', TaskController.updateTask); //nesse caso seria rota do tipo put, pois vai alterar apenas uma especifica task.
+routes.put('/tasks/:id', TaskController.updateTask);
 routes.delete('/tasks/:id', TaskController.deleteTask);
 
 routes.all('*', (req, res, next) => {
