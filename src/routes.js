@@ -5,7 +5,8 @@ import SessionController from './controllers/SessionController';
 import TaskController from './controllers/TaskController'
 
 import authMiddleware from './middlewares/auth';
-
+import AppError from './utils/appError'
+import globalErrorHandler from './controllers/ErrorController'
 const routes = new Router(); 
 
 // Users
@@ -27,5 +28,11 @@ routes.get('/tasks', TaskController.getAllTasks);
 routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
 routes.put('/tasks/:id', TaskController.updateTask); //nesse caso seria rota do tipo put, pois vai alterar apenas uma especifica task.
 routes.delete('/tasks/:id', TaskController.deleteTask);
+
+routes.all('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
+});
+
+routes.use(globalErrorHandler);
 
 export default routes;

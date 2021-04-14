@@ -18,7 +18,7 @@ class TaskController {
             message: err
         });
     }
-  }
+  };
 
   async aliasSortByPriority(req, res, next) {
     req.query.sort = true; // Apenas como referência
@@ -49,7 +49,7 @@ class TaskController {
             message: err
         });
     }
-  }
+  };
 
   async updateTask(req, res) {
     try{
@@ -94,7 +94,7 @@ class TaskController {
             message: err
         });
     }
-  }
+  };
 
   async deleteTask(req, res) {
     try {
@@ -120,6 +120,6 @@ class TaskController {
         });
     }
   }
-}
+};
 
 export default new TaskController();
