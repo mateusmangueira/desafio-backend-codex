@@ -1,12 +1,11 @@
 import request from 'supertest'
 import mongoose from 'mongoose'
 import app from '../src/app'
-import { response } from 'express';
 
 
 let token;
 
-describe('Test my app server', () => { //fazer beforeall para logar
+describe('Test my app server', () => {
     beforeAll((done) => {
         request(app)
         .post('/sessions')
@@ -17,18 +16,17 @@ describe('Test my app server', () => { //fazer beforeall para logar
         .end((err, res) =>{
             token = res.body.token;
             done();
-        });
-
+        })
+       
     });
 
     it('should GET all tasks', async () => {
         const res = await request(app).get('/tasks')
         .set('Authorization', `Bearer ${token}`)
-        expect(res.statusCode).toBe(200)
         expect(res.body.status).toBe('sucess')
         expect(res.body.results).toBe(res.body.data.tasks.length)
         res.body.data.tasks.forEach(task => {
-            expect(task).toHaveProperty('name', 'priority', '_id', 'id')
+            expect(task).toHaveProperty('name', 'user', 'priority', '_id', 'id')
         });
 
     });
