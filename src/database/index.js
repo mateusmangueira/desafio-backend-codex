@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/User';
 import Task from '../models/Task';
 
-//Colocar os Models da aplicacao nessa parte
-
-const models = [User, Task]; //Adicionar o model criado nesse array
+const models = [User, Task];
 
 class Database {
   constructor() {

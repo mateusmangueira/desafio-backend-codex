@@ -26,7 +26,7 @@ class SessionController {
     });
   }
 
-  async logOut (req, res) {
+  async logout (req, res) {
     req.user = undefined;
     blackList.addToken(req.headers.authorization);
     req.headers.authorization = undefined;
