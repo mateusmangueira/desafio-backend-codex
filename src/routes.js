@@ -24,7 +24,7 @@ routes.use((req, res, next) => {
     next();
 });
 
-routes.post('/logout', SessionController.logOut);
+routes.post('/logout', SessionController.logout);
 
 // Tasks
 routes.post('/tasks',TaskController.createTask);

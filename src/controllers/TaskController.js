@@ -22,7 +22,7 @@ class TaskController {
   }
 
   async aliasSortByPriority(req, res, next) {
-    req.query.sort = true; // Apenas como referÃªncia
+    req.query.sort = true;
     next();
   }
 

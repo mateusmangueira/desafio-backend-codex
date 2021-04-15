@@ -1,12 +1,10 @@
 import request from 'supertest'
 import mongoose from 'mongoose'
 import app from '../src/app'
-import { response } from 'express';
-
 
 let token;
 
-describe('Test my app server', () => { //fazer beforeall para logar
+describe('Test my app server', () => {
     beforeAll((done) => {
         request(app)
         .post('/sessions')
