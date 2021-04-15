@@ -1,21 +1,24 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import validator from 'validator'
 
 const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: [true, 'Please tell us your name!']
     },
     email: {
       type: String,
       unique: true,
-      required: true,
+      required: [true, 'Please provide your email.'],
       lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email.']
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a password.'],
+      minlength: 8
     },
     isAuthenticated: {
       type: Boolean,
@@ -27,6 +30,12 @@ const UserSchema = new mongoose.Schema(
     }
   },
 );
+
+UserSchema.virtual('tasks', {
+  ref: 'Task',
+  foreignField: 'user',
+  localField: '_id'
+});
 
 UserSchema.pre('save', async function(next) {
   const password_hash = await bcrypt.hash(this.password, 10);

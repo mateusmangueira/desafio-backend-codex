@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/User';
 import Task from '../models/Task';
 
-//Colocar os Models da aplicacao nessa parte
-
-const models = [User, Task]; //Adicionar o model criado nesse array
+const models = [User, Task];
 
 class Database {
   constructor() {
@@ -19,9 +17,10 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect('mongodb+srv://mateus:123321@backend-desafio-codex.doriq.mongodb.net/backend-desafio?retryWrites=true&w=majority', {
+    const DB = process.env.DATABASE || 'mongodb+srv://mateus:123321@backend-desafio-codex.doriq.mongodb.net/backend-desafio?retryWrites=true&w=majority';
+    this.mongoConnection = mongoose.connect(DB, {
       useNewUrlParser: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
