@@ -1,5 +1,6 @@
 import Task from '../models/Task';
 import User from '../models/User';
+import blackList from './../utils/blackList'
 
 class TaskController {
   async createTask(req, res) {
@@ -25,7 +26,7 @@ class TaskController {
     next();
   }
 
-  async getAllTasks(req, res) {
+  async getUserTasks(req, res) {
     try {
       const user = await User.findById(req.body.user).populate({ path: 'tasks', select: '-__v' });
       let userTasks = user.tasks;
@@ -36,11 +37,13 @@ class TaskController {
 
       let tasks = await userTasks;
 
+      blackList.print();
+
       res.status(200).json({
           status: 'sucess',
           results: tasks.length,
           data: {
-              tasks
+              tasks,
           }
       });
     } catch (err) {

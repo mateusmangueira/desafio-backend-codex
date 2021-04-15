@@ -24,10 +24,12 @@ routes.use((req, res, next) => {
     next();
 });
 
+routes.post('/logout', SessionController.logOut);
+
 // Tasks
 routes.post('/tasks',TaskController.createTask);
-routes.get('/tasks', TaskController.getAllTasks);
-routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getAllTasks);
+routes.get('/tasks', TaskController.getUserTasks);
+routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.getUserTasks);
 routes.put('/tasks/:id', TaskController.updateTask);
 routes.delete('/tasks/:id', TaskController.deleteTask);
 
