@@ -1,4 +1,4 @@
-import { Router } from 'express'; //Router serve para rotear por via do Express qual rota sera chamada, assim facilitando a nossa vida.
+import { Router } from 'express';
 
 import UserController from './controllers/UserController';
 import SessionController from './controllers/SessionController';
