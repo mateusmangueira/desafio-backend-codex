@@ -27,9 +27,9 @@ class SessionController {
   }
 
   async logout (req, res) {
-    req.user = null;
+    req.user = undefined;
     blackList.addToken(req.headers.authorization);
-    req.headers.authorization = null;
+    req.headers.authorization = undefined;
 
     res.status(200).json({ 
       status: 'success',
