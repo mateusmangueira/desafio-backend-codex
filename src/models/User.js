@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator'
 
-const UserSchema = new mongoose.Schema(
-  {
+const UserSchema = new mongoose.Schema({
     name: {
       type: String,
       required: [true, 'Please tell us your name!']
