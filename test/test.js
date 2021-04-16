@@ -20,7 +20,7 @@ describe('Test my app server', () => {
         
     });
 
-    it('should GET user tasks', async () => { //tudo ok
+    it('should GET user tasks', async () => { //TA TUDO CERTO DE GET
         const res = await request(app).get('/tasks')
         .set('Authorization', `Bearer ${token}`)
         expect(res.status).toBe(200)
