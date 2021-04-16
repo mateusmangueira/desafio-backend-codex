@@ -6,11 +6,12 @@ let token;
 let task;
 
 describe('Test my app server', () => {
+
     beforeAll((done) => {
         request(app)
         .post('/sessions')
         .send({
-            email: 'usertest1@gmail.com',
+            email: 'usercodex@gmail.com',
             password: '12345678',
         })
         .end((err, res) => {
@@ -20,7 +21,7 @@ describe('Test my app server', () => {
         
     });
 
-    it('should GET user tasks', async () => { //TA TUDO CERTO DE GET
+    it('should GET user tasks', async () => {
         const res = await request(app).get('/tasks')
         .set('Authorization', `Bearer ${token}`)
         expect(res.status).toBe(200)
