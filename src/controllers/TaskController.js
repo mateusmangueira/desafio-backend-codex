@@ -7,13 +7,13 @@ class TaskController {
     try {
       const newTask = await Task.create(req.body);
 
-      res.status(201).json({//tudo certo
+      res.status(201).json({
           status: 'sucess',
           data: {
             task: newTask
           }
       });
-    } catch (err) {//tudo certo
+    } catch (err) {
         res.status(400).json({
             status: 'fail',
             message: err.message
@@ -21,7 +21,7 @@ class TaskController {
     }
   }
 
-  async aliasSortByPriority(req, res, next) {//nao precisa fazer
+  async aliasSortByPriority(req, res, next) {
     req.query.sort = true;
     next();
   }
@@ -31,7 +31,7 @@ class TaskController {
       const user = await User.findById(req.body.user).populate({ path: 'tasks', select: '-__v' });
       let userTasks = user.tasks;
 
-      if (req.query.sort) {//nao precisa fazer
+      if (req.query.sort) {
         userTasks = userTasks.sort();
       }
 
@@ -39,7 +39,7 @@ class TaskController {
 
       blackList.print();
 
-      res.status(200).json({//tudo certo
+      res.status(200).json({
           status: 'sucess',
           results: tasks.length,
           data: {
@@ -47,7 +47,7 @@ class TaskController {
           }
       });
     } catch (err) {
-        res.status(404).json({//nao sei fazer nem klebin
+        res.status(404).json({
             status: 'fail',
             message: err
         });
@@ -56,7 +56,7 @@ class TaskController {
 
   async updateTask(req, res) {
     try{
-      if(req.body.priority) {//tudo certo
+      if(req.body.priority) {
         return res.status(400).json({
           status: 'fail',
           message: "Priority cannot change"
@@ -65,7 +65,7 @@ class TaskController {
 
       const task = await Task.findById(req.params.id);
 
-      if (task.user != req.body.user) {//nao sei fazer
+      if (task.user != req.body.user) {
         return res.status(400).json({
           status: 'fail',
           message: "User does not have access to this task!"
@@ -77,20 +77,20 @@ class TaskController {
           runValidators: true
       });
       
-      if(!updateTask) {//tbm nao sei fazer sou burro
+      if(!updateTask) {
         return res.status(400).json({
           status: 'fail',
           message: 'ID not found'
         });
       }
 
-      res.status(200).json({//teste ok
+      res.status(200).json({
           status: 'success',
           data: {
               task: updateTask
           }
       });
-    } catch (err) {//nao sei fazer nem klebin tbm
+    } catch (err) {
         res.status(404).json({
             status: 'fail',
             message: err
@@ -116,7 +116,7 @@ class TaskController {
           data: null
       });
     } catch (err) {
-        res.status(404).json({//nao sei fazer tbm sou burro
+        res.status(404).json({
             status: 'fail',
             message: err
         });

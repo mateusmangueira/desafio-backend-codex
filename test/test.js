@@ -20,7 +20,7 @@ describe('Test my app server', () => {
         
     });
 
-    it('should GET user tasks', async () => { //tudo ok
+    it('should GET user tasks', async () => {
         const res = await request(app).get('/tasks')
         .set('Authorization', `Bearer ${token}`)
         expect(res.status).toBe(200)
@@ -32,7 +32,7 @@ describe('Test my app server', () => {
 
     });
 
-    it('should POST a task', async () => { //tudo certo
+    it('should POST a task', async () => { 
         const res = await request(app).post('/tasks')
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -45,7 +45,7 @@ describe('Test my app server', () => {
         expect(res.body.data.task).toHaveProperty('priority', '_id', 'name', 'user', '__v', 'id')
     });
 
-    it('should not POST a task whithout name', async () => {//tudo certo
+    it('should not POST a task whithout name', async () => {
         const res = await request(app).post('/tasks')
         .set('Authorization', `Bearer ${token}`)
         .send({})
@@ -54,7 +54,7 @@ describe('Test my app server', () => {
         expect(res.body.message).toBe('Task validation failed: name: A task must have a name')
     });
 
-    it('should not POST a taks with priority different than "Alta" or "Baixa"', async () => {//tudo certo
+    it('should not POST a taks with priority different than "Alta" or "Baixa"', async () => {
         const res = await request(app).post('/tasks')
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -66,7 +66,7 @@ describe('Test my app server', () => {
         expect(res.body.message).toBe('Task validation failed: priority: A task must be "Alta" or "Baixa"')
     });
 
-    it('should UPDATE a task', async () => {//tudo certo
+    it('should UPDATE a task', async () => {
         const res = await request(app).put(`/tasks/${task._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -77,7 +77,7 @@ describe('Test my app server', () => {
         expect(res.body.data.task).toHaveProperty('priority', '_id', 'name', 'user', '__v', 'id')
     });
 
-    it('should not UPDATE a task if try to change priority', async () => {//tudo ok
+    it('should not UPDATE a task if try to change priority', async () => {
         const res = await request(app).put(`/tasks/${task._id}`)
         .set('Authorization', `Bearer ${token}`)
         .send({
