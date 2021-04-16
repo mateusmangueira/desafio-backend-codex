@@ -1,6 +1,5 @@
 import Task from '../models/Task';
 import User from '../models/User';
-import blackList from './../utils/blackList'
 
 class TaskController {
   async createTask(req, res) {

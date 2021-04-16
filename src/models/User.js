@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema({
       required: [true, 'Please provide a password.'],
       minlength: 8
     },
+    token: {
+      type: String
+    },
     createdAt: {
       type: Date,
       default: Date.now,

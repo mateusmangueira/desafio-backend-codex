@@ -24,6 +24,7 @@ routes.use((req, res, next) => {
     next();
 });
 
+//LogOut
 routes.post('/logout', SessionController.logout);
 
 // Tasks
@@ -33,6 +34,7 @@ routes.get('/tasks/sort', TaskController.aliasSortByPriority, TaskController.get
 routes.put('/tasks/:id', TaskController.updateTask);
 routes.delete('/tasks/:id', TaskController.deleteTask);
 
+//Rota Genêrica
 routes.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
 });
