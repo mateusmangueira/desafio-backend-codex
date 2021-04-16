@@ -15,9 +15,6 @@ class BlackList {
         this.list = [];
     }
 
-    print () {
-        console.log(this.list);
-    }
 }
 
 export default new BlackList();
