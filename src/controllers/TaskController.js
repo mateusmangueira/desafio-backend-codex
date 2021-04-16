@@ -37,9 +37,13 @@ class TaskController {
 
       let tasks = await userTasks;
 
+<<<<<<< HEAD
       blackList.print();
 
       res.status(200).json({
+=======
+      res.status(200).json({//tudo certo
+>>>>>>> b18ae57ba194d4c84e3347d854a86df4c63c5d5f
           status: 'sucess',
           results: tasks.length,
           data: {
